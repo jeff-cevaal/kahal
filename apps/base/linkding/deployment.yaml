@@ -24,8 +24,8 @@ spec:
             - containerPort: 9090
 
           fromEnv:
-		        - secretRef:
-			        name: linkding-container-env
+            - secretRef:
+              name: linkding-container-env
 
           securityContext:
             allowPrivilegeEscalation: false
