@@ -26,3 +26,8 @@ spec:
   values:
     grafana:
       adminPassword: jeff
+      service:
+        annotations:
+          tailscale.com/expose: "true"
+        labels:
+          tailscale.com/hostname: grafana
