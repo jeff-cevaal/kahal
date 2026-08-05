@@ -16,7 +16,7 @@ spec:
     operatorConfig:
       hostname: cluster-operator
       defaultTags:
-	      - tag:k8s-operator
+        - tag:k8s-operator
       proxyConfig:
         defaultTags:
           - tag:k8s
