@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: linkding
   namespace: linkding
+  annotations:
+    tailscale.com/expose: "true"
+    tailscale.com/hostname: linkding
 spec:
   ports:
     - port: 9090
