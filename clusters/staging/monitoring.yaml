@@ -14,9 +14,10 @@ spec:
     name: flux-system
   path: ./monitoring/controllers/staging
   prune: true
-#  decryption:
-#    provider: sops
-#    secretRef:
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
 ---
 #apiVersion: kustomize.toolkit.fluxcd.io/v1
 #kind: Kustomization
@@ -37,5 +38,4 @@ spec:
 #  decryption:
 #    provider: sops
 #    secretRef:
-#      name: sops-age
 #      name: sops-age
