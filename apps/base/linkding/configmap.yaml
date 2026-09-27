@@ -5,5 +5,4 @@ metadata:
 data:
   LD_DB_ENGINE: "postgres"
   LD_DB_DATABASE: "linkding"
-  LD_DB_HOST: "localhost"
   LD_DB_PORT: "5432"
