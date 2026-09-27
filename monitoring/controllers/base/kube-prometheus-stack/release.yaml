@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: '88.x'
+      version: '91.x'
       sourceRef:
         kind: HelmRepository
         name: kube-prometheus-stack
@@ -25,8 +25,11 @@ spec:
         kind: PrometheusRule
   values:
     grafana:
-      adminPassword: jeff
-      service:
+      admin:
+        existingSecret: grafana-admin-credentials
+        userKey: admin-user
+        passwordKey: admin-password
+     service:
         annotations:
           tailscale.com/expose: "true"
           tailscale.com/hostname: grafana
