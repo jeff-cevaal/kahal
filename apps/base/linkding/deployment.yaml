@@ -14,18 +14,36 @@ spec:
     spec:
       securityContext:
         fsGroup: 33 # www-data group ID
-        runAsUser: 33 # www-data group ID
-        runAsGroup: 33 # www-data group ID
+        runAsUser: 33
+        runAsGroup: 33
 
       containers:
         - name: linkding
-          image: sissbruecker/linkding:1.45.0
+          image: sissbruecker/linkding:1.47.0
           ports:
             - containerPort: 9090
 
           envFrom:
+            - configMapRef:
+                name: linkding-configmap
             - secretRef:
-                name: linkding-container-env
+                name: linkding-secret
+          env:
+            - name: LD_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: linkding-db-app
+                  key: user
+            - name: LD_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: linkding-db-app
+                  key: password
+            - name: LD_DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: linkding-db-app
+                  key: host
 
           securityContext:
             allowPrivilegeEscalation: false
