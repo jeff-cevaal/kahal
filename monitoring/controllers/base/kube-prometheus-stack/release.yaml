@@ -29,7 +29,7 @@ spec:
         existingSecret: grafana-admin-credentials
         userKey: admin-user
         passwordKey: admin-password
-     service:
+      service:
         annotations:
           tailscale.com/expose: "true"
           tailscale.com/hostname: grafana
