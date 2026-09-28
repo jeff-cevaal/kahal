@@ -3,4 +3,3 @@ kind: Kustomization
 namespace: tailscale
 resources:
   - ../../base/tailscale-operator/
-  - secret.yaml
