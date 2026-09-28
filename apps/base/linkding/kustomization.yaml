@@ -6,4 +6,5 @@ resources:
   - configmap.yaml
   - service.yaml
   - storage.yaml
+  - secrets.yaml
   - cnpg-database.yaml
