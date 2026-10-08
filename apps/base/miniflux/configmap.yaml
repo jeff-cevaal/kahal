@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: miniflux-configmap
+  namespace: miniflux
+data:
+  RUN_MIGRATIONS: "1"
+  CREATE_ADMIN: "1"
+  POLLING_FREQUENCY: "60"
+  BATCH_SIZE: "10"
+  BASE_URL: "http://miniflux"
