@@ -26,9 +26,8 @@ The cluster runs on a single bare-metal server, **`emet`**. The earlier VMs (`tz
 ```
 kahal/
 ├── apps/
-│   ├── base/linkding/          # cnpg-database, configmap, deployment, kustomization,
-│   │                           #   namespace, secrets, service, storage
-│   └── staging/linkding/       # kustomization.yaml (overlay on base)
+│   ├── base/                   # linkding, miniflux
+│   └── staging/                # kustomization.yaml (overlay on base)
 ├── clusters/staging/           # Flux entrypoint
 │   ├── flux-system/            # gotk-components, gotk-sync, kustomization, secrets
 │   ├── infrastructure.yaml     # Kustomization `infrastructure-controllers` -> infrastructure/controllers/staging
@@ -36,10 +35,10 @@ kahal/
 │   └── apps.yaml               # Kustomization `apps` -> apps/staging
 ├── infrastructure/controllers/
 │   ├── base/                   # cert-manager, cnpg, renovate
-│   └── staging/                # overlays for the same three
+│   └── staging/                # kustomization.yaml (overlay on base)
 ├── monitoring/controllers/
 │   ├── base/                   # kube-prometheus-stack, tailscale-operator
-│   └── staging/                # overlays for the same two
+│   └── staging/                # kustomization.yaml (overlay on base)
 ├── .sops.yaml                  # SOPS creation rules (Age recipient, encrypted_regex)
 ├── .gitignore
 ├── renovate.json
@@ -57,8 +56,6 @@ All three Flux Kustomizations use `prune: true`, SOPS decryption (`sops-age` sec
 - `monitoring-controllers` has no `dependsOn` yet.
 
 `dependsOn` waits for the upstream Kustomization to be Ready. Without `wait: true` on it, Ready only means the manifests were applied, not that the Helm releases are healthy.
-
-**Planned:** move the Tailscale operator from `monitoring/controllers` to `infrastructure/controllers`, since it's cluster plumbing that both Grafana and Linkding rely on. Once moved, `monitoring-controllers` should `dependsOn` `infrastructure-controllers` (Grafana's Tailscale annotations need the operator). Moving a HelmRelease between two pruning Kustomizations can briefly uninstall it; see the `kustomize.toolkit.fluxcd.io/prune: disabled` annotation if that matters.
 
 ## Services
 
@@ -109,3 +106,4 @@ Flux authenticates to GitHub over **SSH** (deploy key), not HTTPS.
 - `base/` holds the definition, `staging/` holds the overlay.
 - NFS-backed PVCs for persistent storage.
 - Validate before pushing: `kubectl kustomize <path>` or `flux build kustomization <name> --path <path>`.
+

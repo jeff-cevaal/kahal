@@ -21,6 +21,7 @@ Homelab Kubernetes, managed with Flux CD. Everything is declared in Git, secrets
 | Service | Tailscale hostname | Port |
 | --- | --- | --- |
 | Linkding (bookmarks) | `linkding` | 9090 |
+| Miniflux (rss) | `miniflux` | 8080 |
 | Grafana (dashboards) | `grafana` | 3000 |
 
 Planned: Miniflux for RSS, with Linkding as the long-term archive.
