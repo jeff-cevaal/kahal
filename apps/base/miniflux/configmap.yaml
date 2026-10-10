@@ -8,4 +8,4 @@ data:
   CREATE_ADMIN: "1"
   POLLING_FREQUENCY: "60"
   BATCH_SIZE: "10"
-  BASE_URL: "http://miniflux"
+  BASE_URL: "http://miniflux.badger-pogona.ts.net"
