@@ -16,15 +16,22 @@ spec:
       securityContext:
         runAsNonRoot: true
         runAsUser: 65534
-        runAsGroup: 65534          
+        runAsGroup: 65534
+        seccompProfile:
+          type: RuntimeDefault
 
       containers:
         - name: miniflux
           image: miniflux/miniflux:2.3.3
           ports:
             - containerPort: 8080
+
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
 
           envFrom:
             - configMapRef:
@@ -37,13 +44,22 @@ spec:
                 secretKeyRef:
                   name: miniflux-db-app
                   key: uri
-          
+
           readinessProbe:
             httpGet:
               path: /healthcheck
               port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /healthcheck
+              path: /healthz
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+      restartPolicy: Always         
