@@ -38,7 +38,7 @@ spec:
             - configMapRef:
                 name: linkding-configmap
             - secretRef:
-                name: linkding-secret
+                name: linkding-secrets
           env:
             - name: LD_DB_USER
               valueFrom:
