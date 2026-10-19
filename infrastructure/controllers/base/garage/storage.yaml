@@ -1,0 +1,78 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: zfs-local
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: garage-meta
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: zfs-local
+  local:
+    path: /yesod/backups/garage/meta
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - emet
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: garage-data
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: zfs-local
+  local:
+    path: /yesod/backups/garage/data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values: 
+                - emet
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: garage-meta
+  namespace: garage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: zfs-local
+  volumeName: garage-meta
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: garage-data
+  namespace: garage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: zfs-local
+  volumeName: garage-data
+  resources:
+    requests:
+      storage: 50Gi

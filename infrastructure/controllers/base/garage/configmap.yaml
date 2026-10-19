@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: garage-configmap
+  namespace: garage
+data:
+  garage.toml: |
+    metadata_dir = "/var/lib/garage/meta"
+    data_dir = "/var/lib/garage/data"
+    db_engine = "sqlite"
+    metadata_fsync = true
+    data_fsync = true
+    metadata_auto_snapshot_interval = "6h"
+    replication_factor = 1
+
+    rpc_bind_addr = "0.0.0.0:3901"
+    rpc_public_addr = "127.0.0.1:3901"
+
+    [s3_api]
+    s3_region = "garage"
+    api_bind_addr = "0.0.0.0:3900"
+
+    [admin]
+    api_bind_addr = "0.0.0.0:3903"
