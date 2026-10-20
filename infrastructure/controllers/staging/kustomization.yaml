@@ -4,5 +4,7 @@ resources:
   - renovate
   - tailscale-operator
   - cert-manager
-  - garage
   - cnpg
+  - barman-cloud
+  - garage
+  
