@@ -1,0 +1,19 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: miniflux-store
+  namespace: miniflux
+spec:
+  retentionPolicy: "30d"
+  configuration:
+    destinationPath: s3://miniflux-backups/
+    endpointURL: http://garage.garage.svc.cluster.local:3900
+    s3Credentials:
+      accessKeyId:
+        name: miniflux-backup-secrets
+        key: ACCESS_KEY_ID
+      secretAccessKey:
+        name: miniflux-backup-secrets
+        key: ACCESS_SECRET_KEY
+    wal:
+      compression: gzip

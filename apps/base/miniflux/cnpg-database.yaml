@@ -11,3 +11,8 @@ spec:
     initdb:
       database: miniflux
       owner: miniflux
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: miniflux-store
