@@ -8,3 +8,5 @@ resources:
   - storage.yaml
   - secrets.yaml
   - cnpg-database.yaml
+  - object-store.yaml
+  - scheduled-backup.yaml
