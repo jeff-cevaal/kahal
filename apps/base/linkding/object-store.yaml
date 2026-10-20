@@ -10,10 +10,10 @@ spec:
     endpointURL: http://garage.garage.svc.cluster.local:3900
     s3Credentials:
       accessKeyId:
-        name: linkding-backup-creds
+        name: linkding-backup-secrets
         key: ACCESS_KEY_ID
       secretAccessKey:
-        name: linkding-backup-creds
+        name: linkding-backup-secrets
         key: ACCESS_SECRET_KEY
     wal:
       compression: gzip

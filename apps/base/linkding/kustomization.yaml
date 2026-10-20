@@ -9,4 +9,5 @@ resources:
   - secrets.yaml
   - cnpg-database.yaml
   - object-store.yaml
+  - backup-secrets.yaml
   - scheduled-backup.yaml
