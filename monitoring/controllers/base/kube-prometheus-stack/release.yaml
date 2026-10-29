@@ -24,6 +24,9 @@ spec:
       target:
         kind: PrometheusRule
   values:
+    prometheus:
+      prometheusSpec:
+        podMonitorSelectorNilUsesHelmValues: false
     grafana:
       admin:
         existingSecret: grafana-admin-credentials
