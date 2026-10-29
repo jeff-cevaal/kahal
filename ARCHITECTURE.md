@@ -62,9 +62,10 @@ All three Flux Kustomizations use `prune: true`, SOPS decryption (`sops-age` sec
 | Service | Tailscale hostname | Port | Notes |
 | --- | --- | --- | --- |
 | Linkding | `linkding` | 9090 | Bookmark manager. CNPG database backed up via Barman Cloud. |
+| Miniflux | `miniflux` | 8080 | RSS aggregrator. CNPG database backed up via Barman Cloud. |
 | Grafana | `grafana` | 3000 | Exposed via the Tailscale operator, configured with annotations in the HelmRelease values. |
 
-Planned: Miniflux (RSS aggregator), with Linkding as the long-term archive.
+Miniflux (RSS aggregator), with Linkding as the long-term archive.
 
 ## Secrets (SOPS / Age)
 
